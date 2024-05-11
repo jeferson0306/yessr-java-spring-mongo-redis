@@ -93,6 +93,8 @@ Cache Details
 O GitHub Actions é utilizado para CI/CD, com a execução de testes unitários, geração de artefatos para publicação e 
 pipeline automatizada sempre quando houver um pull request na branch master.
 
+![img.png](img.png)
+
 ## Desenvolvido por Jeferson Siqueira
 
 - Github: https://github.com/jeferson0306

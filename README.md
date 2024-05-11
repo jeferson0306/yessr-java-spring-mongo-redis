@@ -12,6 +12,7 @@ oferecer uma solução eficiente e escalável.
 - **Lombok**: Biblioteca que ajuda a reduzir o código boilerplate.
 - **Spring Data MongoDB**: Integração do Spring Framework com o MongoDB.
 - **Spring Data Redis**: Integração do Spring Framework com o Redis.
+- **GitHub Actions**: Utilização do GitHub Actions para integração contínua CI/CD.
 
 ## Principais Funcionalidades
 
@@ -87,7 +88,12 @@ Cache Details
 @Cacheable(value = "customer", key = "#document"): Consulta o cache antes de acessar o banco de dados.
 ```
 
-#### Desenvolvido por Jeferson Siqueira
+## GitHub Actions
+
+O GitHub Actions é utilizado para CI/CD, com a execução de testes unitários, geração de artefatos para publicação e 
+pipeline automatizada sempre quando houver um pull request na branch master.
+
+## Desenvolvido por Jeferson Siqueira
 
 - Github: https://github.com/jeferson0306
 - LinkedIn: https://www.linkedin.com/in/developerjefersonsiqueira/

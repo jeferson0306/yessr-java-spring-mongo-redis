@@ -2,26 +2,50 @@ name: CI/CD Pipeline - GitHub Actions
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - '*'
   pull_request:
-    branches: [ "master" ]
+    branches: [ develop, homolog, master ]
 
 jobs:
-  build:
+  merge_to_develop:
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
-      - name: Build with Maven
-        run: mvn -B clean package --file pom.xml
-      - name: Test with Maven
-        run: mvn test
-      - name: Deploy to Production
-        if: github.ref == 'refs/heads/master'
+      - name: Merge to develop branch
+        run: git merge develop
+      - name: Push to develop branch
         run: |
-          echo "Deploying to production..."
+          git push origin develop
+          echo "Deploying to Development..."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  merge_to_homolog:
+    if: github.ref == 'refs/heads/homolog'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Merge to homolog branch
+        run: git merge homolog
+      - name: Push to homolog branch
+        run: |
+          git push origin homolog
+          echo "Deploying to Staging..."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  merge_to_production:
+    if: github.ref == 'refs/heads/production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Merge to master branch
+        run: git merge master
+      - name: Push to master branch
+        run: |
+          git push origin master
+          echo "Deploying to Production..."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

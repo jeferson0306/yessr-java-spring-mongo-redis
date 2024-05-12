@@ -13,6 +13,7 @@ oferecer uma solução eficiente e escalável.
 - **Spring Data MongoDB**: Integração do Spring Framework com o MongoDB.
 - **Spring Data Redis**: Integração do Spring Framework com o Redis.
 - **GitHub Actions**: Utilização do GitHub Actions para integração contínua CI/CD.
+- **`final var` e `final`**: Garantia de imutabilidade e legibilidade do código.
 
 ## Principais Funcionalidades
 

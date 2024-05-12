@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  deploying_into_homolog:
+  deploying_into_staging:
     if: github.ref == 'refs/heads/homolog'
     runs-on: ubuntu-latest
     steps:

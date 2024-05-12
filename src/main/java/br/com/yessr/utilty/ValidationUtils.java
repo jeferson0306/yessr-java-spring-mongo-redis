@@ -12,7 +12,7 @@ public class ValidationUtils {
     private static final Pattern EMAIL_PATTERN = compile(EMAIL_REGEX);
     private static final Pattern PHONE_PATTERN = compile(PHONE_REGEX);
 
-    private ValidationUtils() {
+    ValidationUtils() {
         throw new IllegalStateException("unable to instantiate this utility class");
     }
 

@@ -17,4 +17,5 @@ public record PersonCollection(@Id String id, String name, String document, Stri
     public PersonCollection(String name, String document, String email, String phone, Tier tier, String address, String city, String state, String zipCode, String country, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime birthDate, String gender, List<Purchase> purchases) {
         this(null, name, document, email, phone, tier, address, city, state, zipCode, country, createdAt, updatedAt, birthDate, gender, purchases);
     }
+
 }

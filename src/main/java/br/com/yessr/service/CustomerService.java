@@ -2,8 +2,10 @@ package br.com.yessr.service;
 
 import br.com.yessr.domain.Person;
 import br.com.yessr.domain.collections.PersonCollection;
+import br.com.yessr.domain.exceptions.InvalidDocument;
+import br.com.yessr.domain.exceptions.InvalidEmail;
+import br.com.yessr.domain.exceptions.InvalidPhone;
 import br.com.yessr.repository.PersonRepository;
-import br.com.yessr.utilty.ValidationUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import static br.com.yessr.utilty.ValidationUtils.*;
 
 @Slf4j
 @Service
@@ -23,36 +27,39 @@ public class CustomerService {
     @CachePut(value = "customer", key = "#person.document")
     public Person saveOrUpdateCustomer(final Person person) {
         log.info("starting saving or updating customer data {}", person);
+
         validationPersonalData(person);
+
         final var personCollection = getPersonCollection(person);
         personRepository.save(personCollection);
+
         log.info("finishing saving or updating customer data for document {}", person.document());
         return convertToDomainModel(personCollection);
     }
 
-    private void validationPersonalData(final Person person) {
+    public void validationPersonalData(final Person person) {
 
         log.info("starting validation for document: {}, email: {}, phone: {}", person.document(), person.email(), person.phone());
 
-        if (!ValidationUtils.isValidCPF(person.document())) {
+        if (!isValidCPF(person.document())) {
             log.error("invalid document: {}", person.document());
-            throw new IllegalArgumentException("Invalid document");
+            throw new InvalidDocument("Invalid document");
         }
 
-        if (!ValidationUtils.isValidEmail(person.email())) {
+        if (!isValidEmail(person.email())) {
             log.error("invalid email: {}", person.email());
-            throw new IllegalArgumentException("Invalid email");
+            throw new InvalidEmail("Invalid email");
         }
 
-        if (!ValidationUtils.isValidPhone(person.phone())) {
+        if (!isValidPhone(person.phone())) {
             log.error("invalid phone: {}", person.phone());
-            throw new IllegalArgumentException("Invalid phone");
+            throw new InvalidPhone("Invalid phone");
         }
 
         log.info("validation completed for document: {}, email: {}, phone: {}", person.document(), person.email(), person.phone());
     }
 
-    private PersonCollection getPersonCollection(final Person person) {
+    PersonCollection getPersonCollection(final Person person) {
         log.info("fetching customer data in database with document: {}", person.document());
         return personRepository.findByDocument(person.document()).map(existing -> new PersonCollection(existing.id(), person.name(), person.document(), person.email(), person.phone(), person.tier(), person.address(), person.city(), person.state(), person.zipCode(), person.country(), existing.createdAt(), LocalDateTime.now(), existing.birthDate(), person.gender(), person.purchases())).orElseGet(() -> new PersonCollection(null, person.name(), person.document(), person.email(), person.phone(), person.tier(), person.address(), person.city(), person.state(), person.zipCode(), person.country(), LocalDateTime.now(), LocalDateTime.now(), person.birthDate(), person.gender(), person.purchases()));
     }

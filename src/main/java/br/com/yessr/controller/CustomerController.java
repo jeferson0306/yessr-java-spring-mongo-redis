@@ -21,7 +21,9 @@ public class CustomerController {
     @PostMapping("/save")
     public ResponseEntity<Person> saveOrUpdateCustomer(@RequestBody final Person person) {
         log.info("......starts the process to save or update customer {}", person);
+
         final var customer = customerService.saveOrUpdateCustomer(person);
+
         log.info("finishes the process to save or update customer {}", person);
         return ok(customer);
     }
@@ -29,6 +31,7 @@ public class CustomerController {
     @GetMapping("/{document}")
     public ResponseEntity<Person> getCustomerByDocument(@PathVariable final String document) {
         log.info("......starts fetching customer data with document: {}", document);
+
         return customerService.getCustomerByDocument(document).map(ResponseEntity::ok).orElseGet(() -> {
             log.info("finishes fetching customer with no one found for document {}", document);
             return notFound().build();

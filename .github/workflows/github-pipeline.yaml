@@ -8,7 +8,7 @@ on:
     branches: [ develop, homolog, master ]
 
 jobs:
-  merge_to_develop:
+  deploying_into_develop:
     if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  merge_to_homolog:
+  deploying_into_homolog:
     if: github.ref == 'refs/heads/homolog'
     runs-on: ubuntu-latest
     steps:
@@ -36,7 +36,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  merge_to_production:
+  deploying_into_production:
     if: github.ref == 'refs/heads/production'
     runs-on: ubuntu-latest
     steps:

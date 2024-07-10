@@ -5,7 +5,7 @@ oferecer uma solução eficiente e escalável.
 
 ## Tecnologias Utilizadas
 
-- **Java (JDK 21)**: Linguaguem de Programação Java para desenvolvimento do backend
+- **Java (JDK 21)**: Linguaguem de Programação Java para desenvolvimento do backend.
 - **Spring Boot (3.2.5)**: Framework Java para desenvolvimento de aplicações web e microserviços.
 - **MongoDB**: Banco de dados NoSQL para armazenamento dos dados dos clientes.
 - **Redis**: Sistema de armazenamento de dados em memória usado para caching e melhoria de desempenho.
@@ -43,6 +43,21 @@ O caching é realizado com Redis, permitindo respostas mais rápidas para consul
 
 A utilização do cache proporciona um ganho de performance nas consultas, em comparação com consultas diretas ao MongoDB.
 
+## Como Executar a Aplicação com Docker
+
+### Pré-requisitos
+
+- Docker
+- Docker Compose
+
+### Passos para Executar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/jeferson0306/yessr-java-spring-mongo-redis
+   cd yessr-java-spring-mongo-redis
+   docker-compose up --build
+   
 ## Exemplos de Uso
 
 ```bash

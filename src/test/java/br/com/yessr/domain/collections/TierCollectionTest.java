@@ -1,10 +1,8 @@
 package br.com.yessr.domain.collections;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TierCollectionTest {
 
